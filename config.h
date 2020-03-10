@@ -32,7 +32,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th" };
+static const char *tags[] = { "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" };
 
 static const Rule rules[] = {
 	/* xprop(1):
