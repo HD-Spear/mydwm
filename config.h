@@ -53,7 +53,7 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "Title",      tile },    /* first entry is default */
 	{ "Window",      NULL },    /* no layout function means floating behavior */
-	{ "Max",      monocle },
+	{ "[M]",      monocle },
 };
 
 /* key definitions */
