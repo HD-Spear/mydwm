@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -75,8 +75,11 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *chromecmd[]   = { "google-chrome-stable", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-static const char *trayercmd[] = { "/home/huoda/scripts/trayer.sh", NULL };
+//static const char *trayercmd[] = { "/home/huoda/scripts/trayer.sh", NULL };
 static const char *codecmd[] = { "code", NULL };
+static const char *wallpaperchange[] = { "wp", NULL };
+static const char *sounds[] = { "/home/huoda/scripts/sounds.sh", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -84,8 +87,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = chromecmd } },
-    { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = trayercmd } },
+    //{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = trayercmd } },
     { MODKEY,                       XK_g,      spawn,          {.v = codecmd } },
+    { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaperchange } },
+    { MODKEY,                       XK_e,      spawn,          {.v = sounds } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_o,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
@@ -101,14 +106,14 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
-	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
+	{ MODKEY,                       XK_u,      incrihgaps,     {.i = +1 } },
+	{ MODKEY,                       XK_p,      incrihgaps,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_u,      incrivgaps,     {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_p,      incrivgaps,     {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_u,      incrohgaps,     {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_p,      incrohgaps,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_u,      incrovgaps,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_p,      incrovgaps,     {.i = -1 } },
 	{ MODKEY,                       XK_v,      hidewin,        {0} },
 	{ MODKEY|ShiftMask,             XK_v,      restorewin,     {0} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -125,6 +130,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_Left,   viewtoleft,     {0} },
+	{ MODKEY,                       XK_Right,  viewtoright,    {0} },
+	{ MODKEY|ShiftMask,             XK_Left,   tagtoleft,      {0} },
+	{ MODKEY|ShiftMask,             XK_Right,  tagtoright,     {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
