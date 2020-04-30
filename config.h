@@ -57,7 +57,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -71,12 +71,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //static const char *termcmd[]  = { "st", NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "ala", NULL };
 static const char *chromecmd[]   = { "google-chrome-stable", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-//static const char *trayercmd[] = { "/home/huoda/scripts/trayer.sh", NULL };
-static const char *codecmd[] = { "code", NULL };
+static const char *trayercmd[] = { "/home/huoda/scripts/trayer/demo.sh", NULL };
+static const char *trayerclosecmd[] = { "/home/huoda/scripts/trayer/democlose.sh", NULL };
+static const char *editorcmd[] = { "/home/huoda/scripts/editor.sh", NULL };
 static const char *wallpaperchange[] = { "wp", NULL };
 static const char *sounds[] = { "/home/huoda/scripts/sounds.sh", NULL };
 
@@ -87,8 +88,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = chromecmd } },
-    //{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = trayercmd } },
-    { MODKEY,                       XK_g,      spawn,          {.v = codecmd } },
+    { MODKEY,                       XK_r,      spawn,          {.v = trayercmd } },
+    { MODKEY|ShiftMask,             XK_r,      spawn,          {.v = trayerclosecmd } },
+    { MODKEY,                       XK_g,      spawn,          {.v = editorcmd } },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaperchange } },
     { MODKEY,                       XK_e,      spawn,          {.v = sounds } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -106,21 +108,21 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_u,      incrihgaps,     {.i = +1 } },
-	{ MODKEY,                       XK_p,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_u,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_p,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_u,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_p,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_u,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_p,      incrovgaps,     {.i = -1 } },
+	{ MODKEY,                       XK_h,      incrihgaps,     {.i = +1 } },
+	{ MODKEY,                       XK_l,      incrihgaps,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_h,      incrivgaps,     {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_l,      incrivgaps,     {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_h,      incrohgaps,     {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_l,      incrohgaps,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_h,      incrovgaps,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_l,      incrovgaps,     {.i = -1 } },
 	{ MODKEY,                       XK_v,      hidewin,        {0} },
 	{ MODKEY|ShiftMask,             XK_v,      restorewin,     {0} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -143,7 +145,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} },
 };
 
 /* button definitions */
